@@ -1,0 +1,43 @@
+.statics-title {
+    position: relative;
+    padding-left: 12px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    color: rgba(51, 51, 51, 0.85);
+    line-height: 32px;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(0, 50%);
+      width: 4px;
+      height: 16px;
+      background: #fc5b19;
+    }
+  }
+
+  .statics-item {
+    width: 100%;
+    height: 160px;
+    background: url(../../../assets/images/orange-bg.png) no-repeat;
+    background-size: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    background-position: centercenter;
+
+    .tit {
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 16px;
+      color: #f53f3f;
+    }
+    .num {
+      margin-left: 32px;
+      font-family: DIN-bold;
+      font-size: 48px;
+      color: #ffffff;
+    }
+  }
