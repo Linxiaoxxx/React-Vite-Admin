@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from './redux'
 import App from './App'
-import './request/mock/group1'
+import './request/mock/home'
 
 export function Index() {
   return (

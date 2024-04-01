@@ -1,3 +1,4 @@
+import type { ThemeConfig } from 'antd'
 import { theme as AntTheme, ConfigProvider } from 'antd'
 import { useSelector } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
@@ -12,7 +13,7 @@ function App() {
   // 引入项目自定义主题切换
   useTheme(themeConfig)
 
-  const themeProvide = useMemo(() => {
+  const themeProvide = useMemo<ThemeConfig>(() => {
     const isDark = themeConfig.theme === 'dark'
     return {
 
@@ -22,10 +23,10 @@ function App() {
           headerBg: isDark ? themeConfig.darkLayoutColor : themeConfig.lightLayoutColor
         },
         Menu: {
+          subMenuItemBg: 'transparent',
+          darkSubMenuItemBg: 'transparent',
           itemBg: themeConfig.lightLayoutColor,
-          darkItemBg: themeConfig.darkLayoutColor,
-          subMenuItemBg: themeConfig.lightLayoutColor,
-          darkSubMenuItemBg: themeConfig.darkLayoutColor
+          darkItemBg: themeConfig.darkLayoutColor
         }
       },
       token: {

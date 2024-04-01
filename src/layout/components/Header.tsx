@@ -1,19 +1,22 @@
 import type { MenuProps } from 'antd'
-import { Avatar, Button, Dropdown, Flex, Layout, Space, Switch, Tooltip } from 'antd'
+import { Avatar, Button, Dropdown, Flex, Layout, Space, Switch, Tooltip, theme } from 'antd'
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  PoweroffOutlined,
   SkinOutlined
 } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import type { ReduxType } from 'redux-type'
 import Settings from './Settings'
-import { setCollapsed, setTheme, toggleTheme } from '@/redux/modules/app/action'
+import { toggleTheme } from '@/redux/modules/app/action'
+import toggleAnimationTheme from '@/utils/themeAnimation'
 
 export default function LayoutHeader() {
   const { Header } = Layout
   const dispatch = useDispatch()
+  const { useToken } = theme
+  const {
+    token: { colorBgElevated }
+  } = useToken()
+  const animateRef = useRef<{ colorBgElevated: string }>({ colorBgElevated })
 
   const [settingVisible, setSettingVisible] = useState(false)
   const isDark = useSelector((state: ReduxType) => state.app.themeConfig.theme === 'dark')
@@ -34,6 +37,29 @@ export default function LayoutHeader() {
       )
     }
   ]
+
+  function handleChangeTheme(e: any) {
+    const updateDom = () => {
+      document
+        .querySelector('html')
+        ?.setAttribute('data-prefers-color', !isDark ? 'dark' : 'light')
+      const root = document.documentElement
+      root.classList.remove(isDark ? 'dark' : 'light')
+      root.classList.add(isDark ? 'light' : 'dark')
+      setTimeout(() => {
+        dispatch(toggleTheme())
+      })
+    }
+
+    toggleAnimationTheme(e, isDark, updateDom)
+  }
+
+  useEffect(() => {
+    if (colorBgElevated !== animateRef.current.colorBgElevated) {
+      animateRef.current.colorBgElevated = colorBgElevated
+    }
+  }, [colorBgElevated])
+
   return (
     <Header className="normal-border border-b-1 border-b-solid px-24 shadow-[rgba(0,0,0,0.03)] shadow-md">
       <Flex justify="space-between">
@@ -42,7 +68,7 @@ export default function LayoutHeader() {
 
         <Space size={24}>
 
-          <Switch checked={isDark} checkedChildren="🌜" unCheckedChildren="🌞" onClick={() => dispatch(toggleTheme())} />
+          <Switch checked={isDark} checkedChildren="🌜" unCheckedChildren="🌞" onClick={(_, e) => handleChangeTheme(e)} />
 
           <Tooltip title="风格设置">
             <SkinOutlined className="text-16" onClick={() => setSettingVisible(true)} />
@@ -53,6 +79,7 @@ export default function LayoutHeader() {
         </Space>
       </Flex>
       <Settings visible={settingVisible} toggleSetting={() => { setSettingVisible(false) }} />
+
     </Header>
 
   )

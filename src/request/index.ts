@@ -3,7 +3,8 @@ import ReactHook from 'alova/react'
 import GlobalFetch from 'alova/GlobalFetch'
 import { message } from 'antd'
 import { createAlovaMockAdapter } from '@alova/mock'
-import mockGroup1 from './mock/group1'
+import mockGroup1 from './mock/home'
+import mockGroup2 from './mock/table'
 
 interface IRequest<T = any> {
   code: number
@@ -11,7 +12,7 @@ interface IRequest<T = any> {
   data: T
 }
 
-const mockAdapter = createAlovaMockAdapter([mockGroup1], {
+const mockAdapter = createAlovaMockAdapter([mockGroup1, mockGroup2], {
   // 全局控制是否启用mock接口，默认为true
   enable: true,
   delay: 100,
@@ -42,6 +43,7 @@ const http = createAlova({
       const json = await response.json()
       console.log('json', json)
       if (json.code !== 1) {
+        message.error(json.msg || '请求失败')
         throw new Error(json.message)
       }
 

@@ -57,7 +57,7 @@ export default function LayoutMenu() {
   const [openKeys, setOpenKeys] = useState<string[]>([])
 
   const permissionList = useSelector(
-    (state: ReduxType) => state.user.userInfo.permissionList
+    (state: ReduxType) => state.user.userInfo.permission
   )
   const theme = useSelector(
     (state: ReduxType) => state.app.themeConfig.theme

@@ -1,14 +1,14 @@
 import type { FC } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import './index.less'
-import { Button, Layout } from 'antd'
+import { App, Button, FloatButton, Layout } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
 import { LeftCircleOutlined, LeftOutlined, MenuFoldOutlined, MenuUnfoldOutlined, RightCircleOutlined, RightOutlined } from '@ant-design/icons'
 import type { ReduxType } from 'redux-type'
 import LayoutMenu from './components/Menu'
 import LayoutHeader from './components/Header'
-import { setCollapsed } from '@/redux/modules/app/action'
+import { setCollapsed, toggleTheme } from '@/redux/modules/app/action'
 import { routerArray } from '@/router'
 
 const { Content, Sider } = Layout
@@ -21,8 +21,9 @@ const DefaultLayout: FC = () => {
   const location = useLocation()
   const { nodeRef }
     = routerArray.find(route => route.path === location.pathname) ?? {}
+
   return (
-    <Layout className="wh-full overflow-hidden">
+    <Layout className="wh-full overflow-hidden !bg-[#ff8900]">
       <LayoutHeader />
 
       <Layout>
@@ -64,6 +65,7 @@ const DefaultLayout: FC = () => {
         </Content>
       </Layout>
     </Layout>
+
   )
 }
 
