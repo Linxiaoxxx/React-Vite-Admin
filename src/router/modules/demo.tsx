@@ -10,7 +10,6 @@ const demoRoute: Router.RouteObject = {
   },
   nodeRef: createRef(),
   children: [
-
     {
       element: lazyLoad(React.lazy(() => import('@/views/demo/icon/index'))),
       path: '/demo/icon',

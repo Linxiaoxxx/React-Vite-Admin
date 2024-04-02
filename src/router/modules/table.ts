@@ -1,7 +1,7 @@
 import React, { createRef } from 'react'
 import lazyLoad from '../components/LazyLoad'
 
-const demoRoute: Router.RouteObject = {
+const tableRoute: Router.RouteObject = {
   path: '/table',
   meta: {
     order: 3,
@@ -23,4 +23,4 @@ const demoRoute: Router.RouteObject = {
   ]
 }
 
-export default demoRoute
+export default tableRoute

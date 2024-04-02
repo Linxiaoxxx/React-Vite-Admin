@@ -1,5 +1,5 @@
 import type { MenuProps } from 'antd'
-import { Avatar, Button, Dropdown, Flex, Layout, Space, Switch, Tooltip, theme } from 'antd'
+import { Avatar, Button, Dropdown, Flex, Layout, Space, Switch, Tooltip } from 'antd'
 import {
   SkinOutlined
 } from '@ant-design/icons'
@@ -8,18 +8,15 @@ import type { ReduxType } from 'redux-type'
 import Settings from './Settings'
 import { toggleTheme } from '@/redux/modules/app/action'
 import toggleAnimationTheme from '@/utils/themeAnimation'
+import { userLogout } from '@/redux/modules/user/action'
 
 export default function LayoutHeader() {
   const { Header } = Layout
   const dispatch = useDispatch()
-  const { useToken } = theme
-  const {
-    token: { colorBgElevated }
-  } = useToken()
-  const animateRef = useRef<{ colorBgElevated: string }>({ colorBgElevated })
 
   const [settingVisible, setSettingVisible] = useState(false)
   const isDark = useSelector((state: ReduxType) => state.app.themeConfig.theme === 'dark')
+  const userInfo = useSelector((state: ReduxType) => state.user.userInfo)
 
   const userItems: MenuProps['items'] = [
     {
@@ -33,7 +30,7 @@ export default function LayoutHeader() {
     {
       key: 'logout',
       label: (
-        <Button type="text">退出登录</Button>
+        <a onClick={() => dispatch(userLogout())}>退出登录</a>
       )
     }
   ]
@@ -54,12 +51,6 @@ export default function LayoutHeader() {
     toggleAnimationTheme(e, isDark, updateDom)
   }
 
-  useEffect(() => {
-    if (colorBgElevated !== animateRef.current.colorBgElevated) {
-      animateRef.current.colorBgElevated = colorBgElevated
-    }
-  }, [colorBgElevated])
-
   return (
     <Header className="normal-border border-b-1 border-b-solid px-24 shadow-[rgba(0,0,0,0.03)] shadow-md">
       <Flex justify="space-between">
@@ -74,7 +65,7 @@ export default function LayoutHeader() {
             <SkinOutlined className="text-16" onClick={() => setSettingVisible(true)} />
           </Tooltip>
           <Dropdown menu={{ items: userItems }}>
-            <Avatar className="cursor-point">admin</Avatar>
+            <Avatar className="cursor-point">{userInfo.name}</Avatar>
           </Dropdown>
         </Space>
       </Flex>

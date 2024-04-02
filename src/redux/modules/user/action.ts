@@ -1,16 +1,21 @@
-import { UserState } from "@/redux/interface";
+import type { UserState } from 'redux-type'
 
-export const userUpdate = (payload: Partial<UserState>) => ({
-  type: "USER_UPDATE",
-  payload,
-});
+export function userUpdate(payload: Partial<UserState>) {
+  return {
+    type: 'USER_UPDATE',
+    payload
+  }
+}
 
-export const userLogout = (payload: boolean) => ({
-  type: "USER_LOGOUT",
-  payload,
-});
+export function userLogout() {
+  return {
+    type: 'USER_LOGOUT'
+  }
+}
 
-export const setFirstAuthRouter = (payload: Router.RouteObject | null) => ({
-  type: "SET_FIRST_AUTH_ROUTER",
-  payload,
-});
+export function setFirstAuthRouter(payload: Router.RouteObject | null) {
+  return {
+    type: 'SET_FIRST_AUTH_ROUTER',
+    payload
+  }
+}

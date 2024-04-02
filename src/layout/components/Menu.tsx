@@ -8,6 +8,7 @@ import type { ItemType } from 'antd/es/menu/hooks/useItems'
 import { useSelector } from 'react-redux'
 import type { ReduxType } from 'redux-type'
 import { routerArray } from '@/router'
+import { checkRoutePermission } from '@/router/uitls'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -33,8 +34,8 @@ function getItem(
 function generateMenu(menuConfig: Router.RouteObject[], auth: string[]) {
   const menus: ItemType[] = []
   menuConfig.forEach((menuItem) => {
-    if (menuItem.meta?.hideInMenu) return
-    if (menuItem.meta?.permission && !auth.includes(menuItem.meta.permission)) { return }
+    if (!menuItem.meta || menuItem.meta?.hideInMenu) return
+    if (!checkRoutePermission(menuItem, auth)) { return }
 
     menus.push(
       getItem(

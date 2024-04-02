@@ -12,10 +12,10 @@ export default defineMock(
     '[POST]/userlogin': ({ data }) => {
       let permission: any[] = []
       if (data.username === 'admin' && data.password === '123456') {
-        permission = ['admin', 'user']
+        permission = ['*']
       }
       else if (data.username === 'user' && data.password === '123456') {
-        permission = ['user']
+        permission = ['table']
       }
       else {
         return {

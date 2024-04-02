@@ -10,26 +10,22 @@ import NotFound from '@/views/NotFound'
  * @returns 路由数组
  */
 function generateRouterByModules() {
-  // * 导入所有router
+  // * 导入所有router模块
   const metaRouters: Record<string, Router.RouteObject> = import.meta.glob(
-    './modules/*.ts',
+    './modules/*.(ts|tsx)',
     {
       eager: true,
       import: 'default'
     }
   )
-
-  // * 处理路由
-  return Object.keys(metaRouters).map((item) => {
-    return metaRouters[item]
+  // 排序、整理路由
+  return RouterSort(Object.values(metaRouters)).flatMap((route) => {
+    // 判断添加重定向路由，且重定向的路由顺序很重要，必须先写重定向的路由才有效
+    if (!route.element && route.children) {
+      return [{ path: route.path, element: <Navigate to={route.children?.[0].path ?? ''} /> }, route]
+    }
+    return route
   })
-  // 添加一个重定向地址
-  //   .map((ele: any) => {
-  //   return {
-  //     ...ele,
-  //     element: !ele.element && ele.children ? <Navigate to="/demo/icon" /> : ele.element
-  //   }
-  // })
 }
 
 /**
@@ -47,6 +43,7 @@ export const rootRouter: Router.RouteObject[] = [
     element: lazyLoad(React.lazy(() => import('@/layout/index'))),
     children: RouterSort(routerArray)
   },
+
   {
     path: '/login',
     element: <Login />

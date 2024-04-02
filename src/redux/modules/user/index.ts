@@ -16,7 +16,8 @@ function user(state: UserState = userState, action: AnyAction) {
       case 'USER_UPDATE':
         return action.payload
       case 'USER_LOGOUT':
-        draftState.loginStatus = action.payload
+        draftState.loginStatus = false
+        draftState.userInfo = {}
         break
       case 'SET_FIRST_AUTH_ROUTER':
         draftState.firstAuthRoute = action.payload

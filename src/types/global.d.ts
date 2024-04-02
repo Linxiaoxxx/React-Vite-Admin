@@ -25,7 +25,7 @@ declare global {
       title: string
       icon?: string
       order?: number
-      permission?: string
+      permission?: string | string[]
       svg?: string
       hideInMenu?: boolean
     }
