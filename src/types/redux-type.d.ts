@@ -15,9 +15,15 @@ declare module 'redux-type' {
 	  themeConfig: ThemeConfig
 	}
 
+	interface UserInfo {
+	  name: string
+	  avatar?: string
+	  userid?: string
+	  permission: string[]
+	}
 	interface UserState {
 	  loginStatus: boolean
-	  userInfo: Record<string, any>
+	  userInfo: UserInfo | null
 	  token?: string
 	  firstAuthRoute?: Router.RouteObject | null
 	}

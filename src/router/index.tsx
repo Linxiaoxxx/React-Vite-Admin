@@ -3,7 +3,8 @@ import React from 'react'
 import lazyLoad from './components/LazyLoad'
 import { RouterSort } from './uitls'
 import Login from '@/views/login'
-import NotFound from '@/views/NotFound'
+import NotFound from '@/views/exception/404'
+import NotAuth from '@/views/exception/403'
 
 /**
  * 通过路由模块配置文件生成路由
@@ -51,6 +52,10 @@ export const rootRouter: Router.RouteObject[] = [
   {
     path: '*',
     element: <NotFound />
+  },
+  {
+    path: '/403',
+    element: <NotAuth />
   }
 ]
 

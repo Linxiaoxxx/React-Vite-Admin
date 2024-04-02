@@ -4,7 +4,7 @@ import type { UserState } from 'redux-type'
 
 const userState: UserState = {
   loginStatus: false,
-  userInfo: {},
+  userInfo: null,
   token: '',
   firstAuthRoute: null
 }
@@ -17,7 +17,7 @@ function user(state: UserState = userState, action: AnyAction) {
         return action.payload
       case 'USER_LOGOUT':
         draftState.loginStatus = false
-        draftState.userInfo = {}
+        draftState.userInfo = null
         break
       case 'SET_FIRST_AUTH_ROUTER':
         draftState.firstAuthRoute = action.payload

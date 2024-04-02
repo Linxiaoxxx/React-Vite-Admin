@@ -1,23 +1,23 @@
-import { Button, Result } from "antd";
-import { FC } from "react";
-import { useNavigate } from "react-router";
+import { Button, Result } from 'antd'
+import type { FC } from 'react'
+import { useNavigate } from 'react-router'
 
 const NoAuth: FC = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col items-center justify-center">
       <Result status="403" subTitle="403"></Result>
       <Button
         type="primary"
-        style={{ width: "96px" }}
+        style={{ width: '96px' }}
         onClick={() => {
-          // navigate(defaultRoute);
+          navigate('/')
         }}
       >
         返回首页
       </Button>
     </div>
-  );
-};
+  )
+}
 
-export default NoAuth;
+export default NoAuth
