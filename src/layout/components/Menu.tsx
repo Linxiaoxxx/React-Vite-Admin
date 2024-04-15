@@ -7,7 +7,7 @@ import * as Icons from '@ant-design/icons'
 import type { ItemType } from 'antd/es/menu/hooks/useItems'
 import { useSelector } from 'react-redux'
 import type { ReduxType } from 'redux-type'
-import { routerArray } from '@/router'
+import { routerArray, routersTree } from '@/router'
 import { checkRoutePermission } from '@/router/uitls'
 
 type MenuItem = Required<MenuProps>['items'][number]
@@ -34,6 +34,7 @@ function getItem(
 function generateMenu(menuConfig: Router.RouteObject[], auth: string[]) {
   const menus: ItemType[] = []
   menuConfig.forEach((menuItem) => {
+    // console.log('menuItem', menuItem)
     if (!menuItem.meta || menuItem.meta?.hideInMenu) return
     if (!checkRoutePermission(menuItem, auth)) { return }
 
@@ -85,7 +86,7 @@ export default function LayoutMenu() {
     <Menu
       className="h-full border-r-none"
       mode="inline"
-      items={generateMenu(routerArray, permissionList ?? [])}
+      items={generateMenu(routersTree, permissionList ?? [])}
       selectedKeys={selectedKeys}
       openKeys={openKeys}
       theme={theme}

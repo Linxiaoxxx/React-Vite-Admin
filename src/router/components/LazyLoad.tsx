@@ -1,12 +1,12 @@
-import Nprogress from "@/components/Nprogress";
-import { lazy, Suspense } from "react";
+import { Suspense, lazy } from 'react'
+import Nprogress from '@/components/Nprogress'
 
-const lazyLoad = (Comp: React.LazyExoticComponent<any>): React.ReactNode => {
+function lazyLoad(Comp: React.LazyExoticComponent<any>): React.ReactNode {
   return (
     <Suspense fallback={<Nprogress />}>
       <Comp />
     </Suspense>
-  );
-};
+  )
+}
 
-export default lazyLoad;
+export default lazyLoad

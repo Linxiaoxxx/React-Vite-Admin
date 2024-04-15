@@ -36,12 +36,10 @@ const http = createAlova({
   },
   responded: {
     onSuccess: async (response) => {
-      console.log('response', response)
       if (response.status >= 400) {
         throw new Error(response.statusText)
       }
       const json = await response.json()
-      console.log('json', json)
       if (json.code !== 1) {
         message.error(json.msg || '请求失败')
         throw new Error(json.message)

@@ -1,10 +1,16 @@
 import { Navigate, useRoutes } from 'react-router-dom'
+import type { ReactNode } from 'react'
 import React from 'react'
 import lazyLoad from './components/LazyLoad'
 import { RouterSort } from './uitls'
+import routerConfig from './config'
+import generateRouterByMeta2 from './generateByConfig'
+import generateRouterByConfigNew from './generateByConfigNew'
 import Login from '@/views/login'
 import NotFound from '@/views/exception/404'
 import NotAuth from '@/views/exception/403'
+import Test1 from '@/views/test/test1'
+import Test2 from '@/views/test/test2'
 
 /**
  * 通过路由模块配置文件生成路由
@@ -29,20 +35,20 @@ function generateRouterByModules() {
   })
 }
 
-/**
- * 通过模块配置文件生成路由
- */
-// function generateRouterByMeta() {
-//   return []
-// }
+export const routerArrayOld: Router.RouteObject[] = generateRouterByModules()
+// console.log('routerArrayOld', routerArrayOld)
+export const routerArray: Router.RouteObject[] = generateRouterByMeta2()
+console.log('routerArray', routerArray)
+export const routerArray2: Router.RouteObject[] = generateRouterByConfigNew()
+console.log('routerArray2', routerArray2)
 
-export const routerArray: Router.RouteObject[] = generateRouterByModules()
-
+export const routersTree = []
 export const rootRouter: Router.RouteObject[] = [
   {
     path: '/',
     element: lazyLoad(React.lazy(() => import('@/layout/index'))),
-    children: RouterSort(routerArray)
+    children: routerArray
+    // children: RouterSort(routerArray)
   },
 
   {

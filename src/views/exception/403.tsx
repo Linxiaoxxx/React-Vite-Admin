@@ -6,7 +6,7 @@ const NoAuth: FC = () => {
   const navigate = useNavigate()
   return (
     <div className="flex flex-col items-center justify-center">
-      <Result status="403" subTitle="403"></Result>
+      <Result status="403" title="403"></Result>
       <Button
         type="primary"
         style={{ width: '96px' }}

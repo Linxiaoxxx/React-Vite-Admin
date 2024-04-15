@@ -5,7 +5,6 @@ import type { ReduxType } from 'redux-type'
 
 const BarChart: React.FC<{ data: any }> = (props) => {
   const { themeConfig } = useSelector((state: ReduxType) => state.app)
-  console.log('props', props)
   const config: BarConfig = useMemo(() => {
     return {
       autoFit: true, // 自动适应容器大小
