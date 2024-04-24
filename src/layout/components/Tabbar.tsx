@@ -49,7 +49,7 @@ export default function Tabbar() {
   }, [location])
 
   return (
-    <div className="w-full px-8 pt-8">
+    <div className="w-full pt-8">
       <ConfigProvider theme={{
         components: {
           Tabs: {
