@@ -8,6 +8,7 @@ import { LeftCircleOutlined, LeftOutlined, MenuFoldOutlined, MenuUnfoldOutlined,
 import type { ReduxType } from 'redux-type'
 import LayoutMenu from './components/Menu'
 import LayoutHeader from './components/Header'
+import Tabbar from './components/Tabbar'
 import { setCollapsed, toggleTheme } from '@/redux/modules/app/action'
 import { routerArray } from '@/router'
 
@@ -45,23 +46,25 @@ const DefaultLayout: FC = () => {
         </Sider>
 
         <Content className="relative">
+          <div className="wh-full flex flex-col overflow-hidden">
 
-          <Button className="absolute left-[-12px] top-[50%] translate-y-[50%] overflow-hidden focus:outline-none" shape="circle" size="small" icon={collapsed ? <RightOutlined className="!text-12" /> : <LeftOutlined className="!text-12" />} onClick={() => dispatch(setCollapsed(!collapsed))} />
+            <Button className="absolute left-[-12px] top-[50%] translate-y-[50%] overflow-hidden focus:outline-none" shape="circle" size="small" icon={collapsed ? <RightOutlined className="!text-12" /> : <LeftOutlined className="!text-12" />} onClick={() => dispatch(setCollapsed(!collapsed))} />
+            <Tabbar />
+            <SwitchTransition>
+              <CSSTransition
+                key={location.pathname}
+                nodeRef={nodeRef}
+                timeout={300}
+                classNames="slide"
+                unmountOnExit
+              >
+                <div ref={nodeRef} className="page wh-full overflow-hidden p-16">
 
-          <SwitchTransition>
-            <CSSTransition
-              key={location.pathname}
-              nodeRef={nodeRef}
-              timeout={300}
-              classNames="page"
-              unmountOnExit
-            >
-              <div ref={nodeRef} className="page wh-full overflow-hidden p-16">
-
-                <Outlet />
-              </div>
-            </CSSTransition>
-          </SwitchTransition>
+                  <Outlet />
+                </div>
+              </CSSTransition>
+            </SwitchTransition>
+          </div>
         </Content>
       </Layout>
     </Layout>

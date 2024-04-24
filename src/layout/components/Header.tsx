@@ -65,7 +65,7 @@ export default function LayoutHeader() {
             <SkinOutlined className="text-16" onClick={() => setSettingVisible(true)} />
           </Tooltip>
           <Dropdown menu={{ items: userItems }}>
-            <Avatar className="cursor-point">{userInfo.name}</Avatar>
+            <Avatar className="cursor-point">{userInfo?.name}</Avatar>
           </Dropdown>
         </Space>
       </Flex>

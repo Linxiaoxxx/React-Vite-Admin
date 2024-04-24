@@ -9,10 +9,15 @@ declare module 'redux-type' {
 	  borderRadius: number
 	}
 
+	interface TagProps extends Router.MetaProps {
+	  path: string
+	}
+
 	interface AppState {
 	  collapsed: boolean
 	  //   menuWidth: number
 	  themeConfig: ThemeConfig
+	  tagList: TagProps[]
 	}
 
 	interface UserInfo {

@@ -10,7 +10,11 @@ const appState: AppState = {
     lightLayoutColor: '#fff',
     darkLayoutColor: '#131313',
     borderRadius: 8
-  }
+  },
+  tagList: [{
+    path: '/',
+    title: '首页'
+  }]
 }
 
 // user reducers
@@ -24,11 +28,11 @@ function App(state: AppState = appState, action: AnyAction) {
         draftState.themeConfig.theme = draftState.themeConfig.theme === 'dark' ? 'light' : 'dark'
         break
       case 'SET_THEME':
-        // draftState.themeColor = action.payload.themeColor
-        // draftState.themeColor = action.payload.themeColor
         Object.assign(draftState.themeConfig, action.payload)
         break
-
+      case 'UPDATE_TAG_LIST':
+        draftState.tagList = action.payload
+        break
       default:
         return draftState
     }

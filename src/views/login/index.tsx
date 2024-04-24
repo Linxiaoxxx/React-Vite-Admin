@@ -15,7 +15,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate()
 
   const onFinish = async (values: any) => {
-    const res = await http.Post('/userlogin', { ...values })
+    const res = await http.Post<any>('/userlogin', { ...values })
     if (res) {
       dispatch(
         userUpdate({

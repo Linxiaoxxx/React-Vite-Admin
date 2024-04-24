@@ -1,3 +1,7 @@
+export function defineRouterMeta(meta: Router.MetaProps) {
+  return Object.assign({}, meta)
+}
+
 export function checkRoutePermission(route: Router.RouteObject, auth: string[] = []) {
   if (!route.meta?.permission || !route.meta.permission.length || auth.includes('*')) {
     return true

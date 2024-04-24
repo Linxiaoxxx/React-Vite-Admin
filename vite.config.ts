@@ -26,10 +26,9 @@ export default defineConfig({
     UnoCSS(),
     react(),
     AutoImport({
-      imports: ['react', 'react-router-dom'],
+      imports: ['react', 'react-router-dom', { '@/router/uitls': ['defineRouterMeta'] }],
       include: [/\.[tj]sx?$/, /\.md$/],
       dts: 'src/types/auto-imports.d.ts',
-      // resolvers: [NaiveUiResolver()],s
       eslintrc: {
         enabled: true,
         filepath: 'eslintrc-auto-import.json',

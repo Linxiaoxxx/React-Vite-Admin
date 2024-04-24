@@ -64,7 +64,7 @@ function AuthRouter(props: { children: JSX.Element }) {
   // }, [loginStatus])
 
   // * 路由重定向
-  if (pathname === '/') {
+  if (pathname === '/' && HOME_URL !== '/') {
     return <Navigate to={HOME_URL} />
   }
 

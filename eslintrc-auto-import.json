@@ -37,6 +37,7 @@
     "useParams": true,
     "useResolvedPath": true,
     "useRoutes": true,
-    "useSearchParams": true
+    "useSearchParams": true,
+    "defineRouterMeta": true
   }
 }

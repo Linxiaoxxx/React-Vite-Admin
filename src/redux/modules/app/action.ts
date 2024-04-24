@@ -1,4 +1,4 @@
-import type { ThemeConfig } from 'redux-type'
+import type { TagProps, ThemeConfig } from 'redux-type'
 
 export function setCollapsed(collapsed: boolean) {
   return {
@@ -16,6 +16,13 @@ export function toggleTheme() {
 export function setTheme(payload: Partial<ThemeConfig>) {
   return {
     type: 'SET_THEME',
+    payload
+  }
+}
+
+export function updateTagList(payload: TagProps[]) {
+  return {
+    type: 'UPDATE_TAG_LIST',
     payload
   }
 }

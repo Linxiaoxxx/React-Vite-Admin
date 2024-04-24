@@ -1,20 +1,18 @@
 
-  .page-enter {
-    opacity: 0;
-
+  .slide-enter {
+    transform: translateX(-100%);
   }
   
-  .page-enter-active {
-  opacity: 1;
-   transition: opacity 200ms ease-in;
+  .slide-enter-active {
+    transform: translateX(0);
+    transition: transform 300ms ease-in;
   }
   
-  .page-exit {
-    opacity: 0;
+  .slide-exit {
+    transform: translateX(0);
   }
   
-  .page-exit-active {
-    opacity: 0;
-    transition: opacity 200ms ease-in;
+  .slide-exit-active {
+    transform: translateX(-100%);
+    transition: transform 300ms ease-out;
   }
-  
