@@ -8,7 +8,6 @@ type TargetKey = React.MouseEvent | React.KeyboardEvent | string
 
 export default function Tabbar() {
   const { tagList } = useSelector((state: ReduxType) => state.app)
-  console.log('tagList', tagList)
   const location = useLocation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -39,7 +38,7 @@ export default function Tabbar() {
   useEffect(() => {
     if (tagList.find(item => item.path === location.pathname)) return
     const config = configMap[location.pathname]
-    if (config.isLayout) return
+    if (!config || config.isLayout) return
     const newTagList = [...tagList]
     newTagList.push({
       title: config?.title ?? location.pathname,

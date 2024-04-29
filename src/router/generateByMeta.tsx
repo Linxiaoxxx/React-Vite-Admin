@@ -45,9 +45,10 @@ function flattenMeta(obj: Record<string, Router.MetaProps>, path = '') {
  * @returns Record<string, Router.MetaProps>
  */
 function getRouterConfig() {
-  const configs = import.meta.glob<Router.MetaProps>('../views/**/meta.ts', { eager: true, import: 'default' })
-  const configMap = Object.keys(configs).reduce((acc: Record<string, Router.MetaProps>, cur) => {
-    const path = cur.replace(/\.\.\/views|\.tsx|\/meta\.ts/g, '').replace('/$', '$').replace(/\$(\w+)/g, '/:$1') || '/'
+  const configs = import.meta.glob<Router.MetaProps>('../views/**/meta.(ts|tsx)', { eager: true, import: 'default' })
+  console.log('configs', configs)
+  return Object.keys(configs).reduce((acc: Record<string, Router.MetaProps>, cur) => {
+    const path = cur.replace(/\.\.\/views|\.tsx|\/meta\.tsx|\/meta\.ts/g, '').replace('/$', '$').replace(/\$(\w+)/g, '/:$1') || '/'
     const { children, ...rest } = configs[cur]
     acc[path] = rest
     if (children) {
@@ -55,12 +56,11 @@ function getRouterConfig() {
     }
     return acc
   }, {})
-  return configMap
 }
 export const configMap: Record<string, Router.MetaProps> = getRouterConfig()
 
 function generateByMeta() {
-  const ignorePath = ['login', 'exception', 'components', 'component']
+  const ignorePath = ['login', 'exception', 'components', 'component', 'meta']
   const checkIgnore = (path: string) => ignorePath.some(item => path.includes(item))
   const modules = import.meta.glob<any>('../views/**/*.tsx', { eager: true, import: 'default' })
   const componentModules = Object.keys(modules).filter(key => !checkIgnore(key)).reduce((result: any, key) => {
@@ -141,7 +141,7 @@ function generateByMeta() {
       }
     }
   })
-  // 添加一个根路由重定向地址，避免找不到父路由显示空白页面
+  // 添加一个根路由重定向地址，避免找不到父路由显示空白页面，且顺序很重要！！！
   return RouterSort(routersTree).map((item) => {
     return !item.element && item?.children?.length ? [{ path: item.path, element: <Navigate to={item.children[0].path} /> }, item] : item
   }).flat(2)

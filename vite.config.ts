@@ -54,7 +54,6 @@ export default defineConfig({
     })
   ],
 
-  // mode: "development",
   server: {
     open: false,
     fs: {
@@ -70,6 +69,14 @@ export default defineConfig({
         secure: false,
         ws: true
       }
+    }
+  },
+  build: {
+    rollupOptions: {
+      external: [
+        'antd/es/theme/style/index.js'
+        // 可能还有其他外部模块，可以继续添加
+      ]
     }
   }
 })

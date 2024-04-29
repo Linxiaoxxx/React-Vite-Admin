@@ -20,7 +20,7 @@ const mockAdapter = createAlovaMockAdapter([mockGroup1, mockGroup2], {
   httpAdapter: GlobalFetch()
 })
 
-const http = createAlova({
+const request = createAlova({
   baseURL: '/',
   timeout: 360000,
   //   requestAdapter: GlobalFetch(),
@@ -53,4 +53,4 @@ const http = createAlova({
   }
 })
 
-export default http
+export default request

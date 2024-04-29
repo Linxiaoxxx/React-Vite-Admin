@@ -7,9 +7,17 @@ const appState: AppState = {
   themeConfig: {
     theme: 'light',
     primaryColor: '#1890ff',
-    lightLayoutColor: '#fff',
-    darkLayoutColor: '#131313',
-    borderRadius: 8
+    borderRadius: 8,
+    light: {
+      bodyBg: '#f5f5f5',
+      siderBg: '#fff',
+      headerBg: '#fff'
+    },
+    dark: {
+      bodyBg: '#131313',
+      siderBg: '#131313',
+      headerBg: '#131313'
+    }
   },
   tagList: [{
     path: '/',

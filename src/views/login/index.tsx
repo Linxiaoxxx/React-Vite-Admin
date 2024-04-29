@@ -1,21 +1,18 @@
 import React from 'react'
-import { App, Button, Card, Checkbox, Form, Input } from 'antd'
+import { Space } from 'antd'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useForm } from '@alova/scene-react'
+import { LoginForm, ProFormText } from '@ant-design/pro-components'
+import { AlipayCircleOutlined, LockOutlined, TaobaoCircleOutlined, UserOutlined, WeiboCircleOutlined } from '@ant-design/icons'
 import { userUpdate } from '@/redux/modules/user/action'
-import { findFirstAuthRoute } from '@/router/uitls'
-import http from '@/request'
-
-// import { findFirstAuthRoute, routerArray } from "@/router";
+import request from '@/request'
 
 const Login: React.FC = () => {
   const dispatch = useDispatch()
-  // const [form] = Form.useForm()
   const navigate = useNavigate()
 
   const onFinish = async (values: any) => {
-    const res = await http.Post<any>('/userlogin', { ...values })
+    const res = await request.Post<any>('/userlogin', { ...values })
     if (res) {
       dispatch(
         userUpdate({
@@ -24,48 +21,58 @@ const Login: React.FC = () => {
         })
       )
       const first: any = null
-      // const first = findFirstAuthRoute(routerArray, userPermission);
       navigate(first?.path ?? '/')
     }
   }
 
   return (
-    <App className="wh-screen flex items-center justify-center">
 
-      <Card className="w-400 shadow-[0_2px_10px_2px_rgba(0,0,0,0.1)]" bordered={false}>
-        <div className="mb-32 text-center text-24 font-bold">登录</div>
-        <Form
-          onFinish={onFinish}
-          autoComplete="off"
-          layout="vertical"
-          onSubmitCapture={() => {
-            return false
+    <div className="wh-full flex-center">
+
+      <LoginForm
+        title="WELCOME"
+        containerStyle={{ justifyContent: 'center' }}
+        subTitle="打开新世界"
+        actions={(
+          <Space>
+            其他登录方式
+            <AlipayCircleOutlined />
+            <TaobaoCircleOutlined />
+            <WeiboCircleOutlined />
+          </Space>
+        )}
+        onFinish={onFinish}
+      >
+        <ProFormText
+          name="username"
+          fieldProps={{
+            size: 'large',
+            prefix: <UserOutlined className="prefixIcon" />
           }}
-        >
-          <Form.Item
-            label="Username"
-            name="username"
-            rules={[{ required: true, message: '请输入' }]}
-          >
-            <Input onPressEnter={e => e.preventDefault()} />
-          </Form.Item>
-
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[{ required: true, message: '请输入' }]}
-          >
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item className="text-center">
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
-      </Card>
-    </App>
+          placeholder="用户名: admin or user"
+          rules={[
+            {
+              required: true,
+              message: '请输入用户名!'
+            }
+          ]}
+        />
+        <ProFormText.Password
+          name="password"
+          fieldProps={{
+            size: 'large',
+            prefix: <LockOutlined className="prefixIcon" />
+          }}
+          placeholder="密码: 123456"
+          rules={[
+            {
+              required: true,
+              message: '请输入密码！'
+            }
+          ]}
+        />
+      </LoginForm>
+    </div>
   )
 }
 

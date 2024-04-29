@@ -13,7 +13,7 @@ declare global {
 
     interface MetaProps {
       title: string
-      icon?: string
+      icon?: string | React.ReactNode
       order?: number
       permission?: string | string[]
       hideInMenu?: boolean

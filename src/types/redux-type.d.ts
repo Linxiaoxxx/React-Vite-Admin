@@ -4,9 +4,17 @@ declare module 'redux-type' {
 	interface ThemeConfig {
 	  theme: 'dark' | 'light'
 	  primaryColor: Color
-	  lightLayoutColor: Color
-	  darkLayoutColor: Color
 	  borderRadius: number
+	  light: {
+	    bodyBg: Color
+	    siderBg: Color
+	    headerBg: Color
+	  }
+	  dark: {
+	    bodyBg: Color
+	    siderBg: Color
+	    headerBg: Color
+	  }
 	}
 
 	interface TagProps extends Router.MetaProps {

@@ -2,7 +2,7 @@ import React, { createRef } from 'react'
 import lazyLoad from '../components/LazyLoad'
 
 const homeRoute: Router.RouteObject = {
-  element: lazyLoad(React.lazy(() => import('@/views/home/index'))),
+  element: lazyLoad(React.lazy(() => import('@/views/index'))),
   path: '/home',
   nodeRef: createRef(),
   meta: {

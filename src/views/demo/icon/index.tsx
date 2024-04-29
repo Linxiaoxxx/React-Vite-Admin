@@ -3,12 +3,16 @@ import { Card, Space, Typography } from 'antd'
 export default function Icon() {
   const { Paragraph } = Typography
   return (
-    <>
+    <div className="wh-full overflow-auto p-16">
       <Card title="className 使用">
         <Space direction="vertical">
           <Typography>
             <Paragraph>
-              <blockquote> 将图标名称作为className使用，className的规则是 "i-icon-[素材组]-[图标名称]"，可自定义大小和颜色等样式 </blockquote>
+              <blockquote>
+                {' '}
+                将图标名称作为className使用，className的规则是 "i-[自定义前缀]-[素材组]-[图标名称]"，可自定义大小和颜色等样式。
+                <strong>（注意无法动态类名使用）</strong>
+              </blockquote>
               <blockquote>
                 <a href="https://icones.js.org/">
                   图标资源网站
@@ -46,6 +50,6 @@ export default function Icon() {
         </Space>
       </Card>
 
-    </>
+    </div>
   )
 }

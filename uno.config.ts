@@ -17,6 +17,7 @@ export default defineConfig({
     presetIcons({
       collections: {
         // 使用本地svg作为字体图标 使用方式 class="i-custom-[name]"
+        // 但是无法用动态名称加载
         custom: FileSystemIconLoader('./src/assets/icons', svg => svg.replace(/fill="none"|fill="#[0-9a-fA-F]{3,6}"|fill="[^"]*"/g, 'fill="currentColor"'))
       }
     })

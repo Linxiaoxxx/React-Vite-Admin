@@ -20,14 +20,6 @@ export default function LayoutHeader() {
 
   const userItems: MenuProps['items'] = [
     {
-      key: 'about',
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-          关于我们
-        </a>
-      )
-    },
-    {
       key: 'logout',
       label: (
         <a onClick={() => dispatch(userLogout())}>退出登录</a>

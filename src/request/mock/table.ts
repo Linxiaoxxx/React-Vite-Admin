@@ -2,10 +2,11 @@ import { defineMock } from '@alova/mock'
 import Mock from 'mockjs'
 
 // 模拟生成表格数据
-function generateTableData(page: number, pageSize: number) {
+function generateTableData(page: number, pageSize: number, status?: string) {
   const data = []
   const totalCount = 100 // 假设总数据条数为100条
   const totalPages = Math.ceil(totalCount / pageSize)
+  const statusDict = ['已登记', '已提交', '已审核', '已归档']
 
   if (page > totalPages) {
     return {
@@ -22,6 +23,7 @@ function generateTableData(page: number, pageSize: number) {
       id: index,
       name: Mock.Random.cname(),
       age: Mock.Random.integer(20, 50),
+      status: status || Mock.Random.pick(statusDict),
       address: Mock.mock('@county(true)')
     })
   }
@@ -39,7 +41,7 @@ function generateTableData(page: number, pageSize: number) {
 
 export default defineMock({
   '/table/page': ({ query }) => {
-    const { page = 1, pageSize = 10 } = query
-    return generateTableData(Number(page), Number(pageSize))
+    const { current = 1, pageSize = 10, status = '' } = query
+    return generateTableData(Number(current), Number(pageSize), status)
   }
 }, true)

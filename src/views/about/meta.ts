@@ -1,12 +1,6 @@
 export default defineRouterMeta({
-  title: 'About',
+  title: '关于本站',
   order: 5,
-  children: {
-    ':name': {
-      title: 'About :name',
-      hideInMenu: true
-
-    }
-  }
+  icon: 'SmileOutlined'
 
 })

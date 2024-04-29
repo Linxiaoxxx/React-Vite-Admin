@@ -16,17 +16,18 @@ function App() {
   const themeProvide = useMemo<ThemeConfig>(() => {
     const isDark = themeConfig.theme === 'dark'
     return {
-
       algorithm: isDark ? AntTheme.darkAlgorithm : AntTheme.defaultAlgorithm,
       components: {
         Layout: {
-          headerBg: isDark ? themeConfig.darkLayoutColor : themeConfig.lightLayoutColor
+          headerBg: isDark ? themeConfig.dark.headerBg : themeConfig.light.headerBg,
+          bodyBg: isDark ? themeConfig.dark.bodyBg : themeConfig.light.bodyBg
         },
         Menu: {
           subMenuItemBg: 'transparent',
           darkSubMenuItemBg: 'transparent',
-          itemBg: themeConfig.lightLayoutColor,
-          darkItemBg: themeConfig.darkLayoutColor
+          itemBg: themeConfig.light.siderBg,
+          darkItemBg: themeConfig.dark.siderBg
+
         }
       },
       token: {
@@ -34,7 +35,7 @@ function App() {
         borderRadius: themeConfig.borderRadius
       }
     }
-  }, [themeConfig.theme])
+  }, [themeConfig])
   return (
     <BrowserRouter>
       <ConfigProvider

@@ -9,15 +9,15 @@ import type { ReduxType } from 'redux-type'
 import LayoutMenu from './components/Menu'
 import LayoutHeader from './components/Header'
 import Tabbar from './components/Tabbar'
-import { setCollapsed, toggleTheme } from '@/redux/modules/app/action'
+import LayoutSider from './components/Sider'
+import { setCollapsed } from '@/redux/modules/app/action'
 import { routerArray } from '@/router'
 
-const { Content, Sider } = Layout
+const { Content } = Layout
 
 const DefaultLayout: FC = () => {
   const dispatch = useDispatch()
   const collapsed = useSelector((state: ReduxType) => state.app.collapsed)
-  const theme = useSelector((state: ReduxType) => state.app.themeConfig.theme)
 
   const location = useLocation()
   const { nodeRef }
@@ -28,23 +28,8 @@ const DefaultLayout: FC = () => {
       <LayoutHeader />
 
       <Layout>
-        <Sider
-          width={200}
-          theme={theme}
-          collapsible
-          trigger={null}
-          collapsed={collapsed}
-          breakpoint="lg"
-          collapsedWidth={56}
-          className="normal-border border-r-1 border-r-solid"
-          onBreakpoint={(broken) => {
-            dispatch(setCollapsed(broken))
-          }}
-          onCollapse={() => dispatch(setCollapsed(!collapsed))}
-        >
-          <LayoutMenu />
-        </Sider>
 
+        <LayoutSider />
         <Content className="relative">
           <div className="wh-full flex flex-col overflow-hidden">
 
@@ -58,7 +43,7 @@ const DefaultLayout: FC = () => {
                 classNames="slide"
                 unmountOnExit
               >
-                <div ref={nodeRef} className="page wh-full overflow-hidden p-16">
+                <div ref={nodeRef} className="slide wh-full overflow-hidden">
 
                   <Outlet />
                 </div>

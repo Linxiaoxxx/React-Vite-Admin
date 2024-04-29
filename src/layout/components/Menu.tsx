@@ -13,8 +13,8 @@ import { checkRoutePermission } from '@/router/uitls'
 type MenuItem = Required<MenuProps>['items'][number]
 
 const customIcons: { [key: string]: any } = Icons
-function addIcon(name: string) {
-  return React.createElement(customIcons[name])
+function addIcon(name: string | React.ReactNode) {
+  return typeof name === 'string' ? React.createElement(customIcons[name]) : name
 }
 
 function getItem(
@@ -69,22 +69,35 @@ export default function LayoutMenu() {
     _,
     key
   }: any) => {
-    // const path = keyPath.reverse().join('/')
     navigate(key)
   }
   const handleOpenChange = (openKeys: string[]) => {
     setOpenKeys(openKeys)
   }
 
+  const getOpenKeys = (pathname: string) => {
+    const pathSegments = pathname.split('/')
+    const openKeys = []
+    // 获取当前路由的父级路由
+    // 例如：/home/list => ['/home', '/home/list']
+    for (let i = 1; i < pathSegments.length; i++) {
+      const key = pathSegments.slice(0, i + 1).join('/')
+      if (key !== '' && key !== '/') {
+        openKeys.push(key)
+      }
+    }
+    return openKeys
+  }
+
   useEffect(() => {
     // 获取当前路由
-    setOpenKeys(pathname.split('/').map((p: string) => `/${p}`))
+    setOpenKeys(getOpenKeys(pathname))
     setSelectedKeys([pathname])
   }, [pathname])
 
   return (
     <Menu
-      className="h-full border-r-none"
+      className="h-full !border-r-none"
       mode="inline"
       items={generateMenu(routerArray, permissionList ?? [])}
       selectedKeys={selectedKeys}

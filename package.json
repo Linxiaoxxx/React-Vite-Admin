@@ -16,6 +16,7 @@
     "@ant-design/charts": "^2.0.3",
     "@ant-design/colors": "^7.0.2",
     "@ant-design/icons": "^5.2.6",
+    "@ant-design/pro-components": "^2.7.1",
     "@iconify/utils": "^2.1.22",
     "@reduxjs/toolkit": "^1.9.7",
     "@types/nprogress": "^0.2.0",

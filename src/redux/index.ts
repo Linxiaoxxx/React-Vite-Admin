@@ -11,7 +11,6 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { configureStore } from '@reduxjs/toolkit'
-import { createLogger } from 'redux-logger'
 import user from './modules/user'
 import app from './modules/app'
 
@@ -38,8 +37,8 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
       }
-    }).concat(createLogger()),
-  devTools: process.env.NODE_ENV !== 'production'
+    }),
+  devTools: import.meta.env.NODE !== 'production'
 })
 
 // 创建持久化 store
