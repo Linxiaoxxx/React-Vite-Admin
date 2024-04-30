@@ -1,17 +1,21 @@
-# react-vite-demo1
-
+# React-Vite-Admin
 #### 介绍
-react+vite
+React+Vite+Typescript+AntDesign 搭建的轻量级可开箱即用的中台系统框架
+预览地址 [https://linxiaoxxx.github.io/React-Vite-Admin/](https://linxiaoxxx.github.io/React-Vite-Admin/)
 
-#### 软件架构
-软件架构说明
+#### 亮点
+
+1. 实现了两种路由构建方式，可通过路由配置或自动根据所有tsx文件生成路由
+2. 实现主题切换可视化、过滤动画
+3. 使用UnoCSS规范样式编写
+4. 便捷使用本地svg以及大量svg图标资源 
 
 
-#### 安装教程
+#### 运行
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  pnpm i
+2.  pnpm dev
+3.  pnpm build
 
 #### 使用说明
 
