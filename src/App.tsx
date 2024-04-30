@@ -33,7 +33,9 @@ function App() {
       token: {
         colorPrimary: themeConfig.primaryColor,
         borderRadius: themeConfig.borderRadius
-      }
+      },
+      cssVar: true,
+      hashed: false
     }
   }, [themeConfig])
   return (

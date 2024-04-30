@@ -136,6 +136,7 @@ export default () => {
           labelWidth: 'auto'
         }}
         scroll={{
+          x: true,
           y: 'calc(100% - 48px)'
         }}
         options={false}
