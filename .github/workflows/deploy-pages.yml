@@ -61,7 +61,7 @@ jobs:
         run: pnpm i --frozen-lockfile
       # 6、打包
       - name: Build
-        run: pnpm docs:build
+        run: pnpm build
       # 7、部署 GitHub Pages
       - name: Deploy GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
