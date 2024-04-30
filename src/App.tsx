@@ -1,7 +1,7 @@
 import type { ThemeConfig } from 'antd'
 import { theme as AntTheme, ConfigProvider } from 'antd'
 import { useSelector } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, HashRouter } from 'react-router-dom'
 import zhCN from 'antd/locale/zh_CN'
 import type { ReduxType } from 'redux-type'
 import AuthRouter from './router/components/AuthRouter'
@@ -39,7 +39,7 @@ function App() {
     }
   }, [themeConfig])
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ConfigProvider
         locale={zhCN}
         theme={themeProvide}
@@ -48,7 +48,7 @@ function App() {
           <Router />
         </AuthRouter>
       </ConfigProvider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
