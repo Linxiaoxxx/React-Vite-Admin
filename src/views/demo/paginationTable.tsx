@@ -106,9 +106,9 @@ export default () => {
     current: 1
   })
   return (
-    <div className="wh-full overflow-hidden p-16">
+    <div className="wh-full overflow-x-hidden overflow-y-auto p-16">
       <ProTable<UserItem>
-        className="fix-table"
+        // className="fix-table"
         columns={columns}
         actionRef={actionRef}
         cardBordered
@@ -135,10 +135,11 @@ export default () => {
         search={{
           labelWidth: 'auto'
         }}
-        scroll={{
-          x: true,
-          y: 'calc(100% - 48px)'
-        }}
+        // scroll={{
+        //   x: true,
+        //   // y: 'calc(100% - 48px)'
+        //   y: 600
+        // }}
         options={false}
         pagination={{
           pageSize: params.pageSize,

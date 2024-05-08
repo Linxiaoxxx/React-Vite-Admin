@@ -1,8 +1,10 @@
+import React from 'react'
+import lazyLoad from './components/LazyLoad'
 import { RouterSort } from './uitls'
 
 const routersTree: Router.RouteObject[] = []
 
-function findObjectByPathAndKey(path: string, array: any[]): any {
+export function findObjectByPathAndKey(path: string, array: any[]): any {
   for (let i = 0; i < array.length; i++) {
     const obj = array[i]
 
@@ -77,7 +79,7 @@ function generateByMeta() {
       path,
       meta: configMap[path] || { title: path },
       nodeRef: createRef(),
-      element: Component ? <Component /> : null
+      element: Component ? lazyLoad(Component) : null
     }
     if (childrenPath) {
       router.children = [createRouter(childrenPath)]
