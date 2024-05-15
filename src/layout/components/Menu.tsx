@@ -1,5 +1,3 @@
-// import { routerArray } from "@/router";
-import type { MenuProps } from 'antd'
 import { Menu } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -10,25 +8,9 @@ import type { ReduxType } from 'redux-type'
 import { routerArray } from '@/router'
 import { checkRoutePermission } from '@/router/uitls'
 
-type MenuItem = Required<MenuProps>['items'][number]
-
 const customIcons: { [key: string]: any } = Icons
 function addIcon(name: string | React.ReactNode) {
   return typeof name === 'string' ? React.createElement(customIcons[name]) : name
-}
-
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[]
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label
-  } as MenuItem
 }
 
 function generateMenu(menuConfig: Router.RouteObject[], auth: string[]) {
@@ -36,18 +18,15 @@ function generateMenu(menuConfig: Router.RouteObject[], auth: string[]) {
   menuConfig.forEach((menuItem) => {
     if (!menuItem.meta || menuItem.meta?.hideInMenu) return
     if (!checkRoutePermission(menuItem, auth)) { return }
-    // console.log('menuItem', menuItem)
-
-    menus.push(
-      getItem(
-        menuItem.meta!.title,
-        menuItem.path,
-        menuItem.meta?.icon ? addIcon(menuItem.meta.icon) : null,
-        menuItem?.children?.length && generateMenu(menuItem.children, auth).length
-          ? generateMenu(menuItem.children, auth)
-          : undefined
-      )
-    )
+    const { meta, path, children = [] } = menuItem
+    menus.push({
+      label: meta.link ? <a href={meta.link?.href} target={`${meta.link.target || '_blank'}`}>{meta!.title}</a> : meta!.title,
+      key: meta.link ? `link-${path}` : path,
+      icon: meta?.icon ? addIcon(menuItem.meta.icon) : null,
+      children: children?.length && generateMenu(children, auth).length
+        ? generateMenu(children, auth)
+        : undefined
+    })
   })
   return menus
 }
@@ -69,6 +48,9 @@ export default function LayoutMenu() {
     _,
     key
   }: any) => {
+    if (key.startsWith('link-')) {
+      return
+    }
     navigate(key)
   }
   const handleOpenChange = (openKeys: string[]) => {

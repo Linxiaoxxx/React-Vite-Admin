@@ -1,4 +1,3 @@
-import React from 'react'
 import lazyLoad from './components/LazyLoad'
 import { RouterSort } from './uitls'
 
@@ -48,7 +47,6 @@ function flattenMeta(obj: Record<string, Router.MetaProps>, path = '') {
  */
 function getRouterConfig() {
   const configs = import.meta.glob<Router.MetaProps>('../views/**/meta.(ts|tsx)', { eager: true, import: 'default' })
-  console.log('configs', configs)
   return Object.keys(configs).reduce((acc: Record<string, Router.MetaProps>, cur) => {
     const path = cur.replace(/\.\.\/views|\.tsx|\/meta\.tsx|\/meta\.ts/g, '').replace('/$', '$').replace(/\$(\w+)/g, '/:$1') || '/'
     const { children, ...rest } = configs[cur]
@@ -105,7 +103,7 @@ function generateByMeta() {
       }
     }
   }
-  Object.keys(componentModules).forEach((path) => {
+  Object.keys(configMap).forEach((path) => {
     const matchArr = path.split('/').filter(item => !!item)
     if (!matchArr.length) {
       // 匹配单/首页

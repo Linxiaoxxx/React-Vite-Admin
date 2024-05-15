@@ -4,12 +4,10 @@ export interface TableData {
 
 declare global {
   declare namespace Router {
-    type RouteType = 'route' | 'link' | 'iframe'
     interface LinkProps {
       href: string
       target: '_blank' | 'viewFrame'
     }
-    type LinkType = string | LinkProps
 
     interface MetaProps {
       title: string
@@ -17,8 +15,7 @@ declare global {
       order?: number
       permission?: string | string[]
       hideInMenu?: boolean
-      routeType?: RouteType // 路由类型
-      link?: LinkType // 当路由类型为 link | iframe 时需要填写此信息
+      link?: LinkProps // 当路由类型为 link | iframe 时需要填写此信息
       isLayout?: boolean // 是否是布局路由
       children?: Record<string, MetaProps>
     }
@@ -28,9 +25,18 @@ declare global {
       path: string
       name?: string
       meta?: MetaProps
-      // isLink?: string
       nodeRef?: RefObject<T>
     }
+
+    interface GenerateConfig {
+      ignoreFiles?: string[] // 忽略的文件名
+      // skipLoginCheck?: string[] // 跳过登录检测的路径
+    }
+    interface RouterConfig extends GenerateConfig {
+      byModules?: boolean // 是否根据自定义模块划分路由
+      modules?: string[] // 自定义模块
+    }
+
   }
 
   const defineRouterMeta: (meta: Router.MetaProps) => Router.MetaProps

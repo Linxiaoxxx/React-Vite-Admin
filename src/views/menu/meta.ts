@@ -16,11 +16,18 @@ export default defineRouterMeta({
       title: '跳转菜单',
       order: 2
     },
-
     ':id': {
       title: '跳转页面',
-      order: 3,
+      order: 2,
       hideInMenu: true
+    },
+    'jumpOutside': {
+      title: '跳转外链',
+      order: 3,
+      link: {
+        href: 'https://www.baidu.com',
+        target: '_blank'
+      }
     }
   }
 })

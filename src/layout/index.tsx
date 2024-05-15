@@ -4,7 +4,7 @@ import './index.less'
 import { App, Button, Layout } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
-import { LeftCircleOutlined, LeftOutlined, MenuFoldOutlined, MenuUnfoldOutlined, RightCircleOutlined, RightOutlined } from '@ant-design/icons'
+import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import type { ReduxType } from 'redux-type'
 import LayoutMenu from './components/Menu'
 import LayoutHeader from './components/Header'
@@ -25,9 +25,6 @@ const DefaultLayout: FC = () => {
   const { nodeRef }
     = findObjectByPathAndKey(location.pathname, routerArray)
 
-  useEffect(() => {
-    console.log('nodeRef', nodeRef)
-  }, [nodeRef])
   return (
     <Layout className="wh-full overflow-hidden !bg-[#ff8900]">
       <LayoutHeader />
